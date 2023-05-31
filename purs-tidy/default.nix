@@ -1,22 +1,15 @@
 { pkgs ? import <nixpkgs> { inherit system; }
 , system ? builtins.currentSystem
-, nodejs ? pkgs."nodejs-18_x"
+, nodejs ? pkgs."nodejs-16_x"
+, napalm
 }:
-
 let
-  version = "0.9.2";
-
-  nodeEnv = import ./node-env.nix {
-    inherit (pkgs) stdenv lib python2 runCommand writeTextFile;
-    inherit pkgs nodejs;
-    libtool = if pkgs.stdenv.isDarwin then pkgs.darwin.cctools else null;
+  purs-tidy = pkgs.fetchFromGitHub {
+    rev = "v0.9.2";
+    owner = "natefaubion";
+    repo = "purescript-tidy";
+    sha256 = "sha256-zn9+LC710bgbxflr8ggdam6Z5H6LA1Df/mYRjF/zzkQ=";
   };
-
-  nodePackage = import ./node-packages.nix {
-    inherit (pkgs) fetchurl nix-gitignore stdenv lib fetchgit;
-    inherit nodeEnv;
-  };
-
-  source = nodePackage.sources."purs-tidy-${version}".src;
 in
-nodeEnv.buildNodePackage (nodePackage.args // { src = source; })
+  napalm.buildPackage "${purs-tidy}" { packageLock = "${purs-tidy}/package-lock.json";}
+

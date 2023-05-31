@@ -1,6 +1,14 @@
 { pkgs ? import <nixpkgs> { } }:
 
 let
+  napalm = import ./napalm.nix {
+    inherit pkgs;
+  };
+
+  patchPackageLock = import ./patch-package-lock.nix {
+    inherit pkgs;
+  };
+
   easy-dhall = import ./easy-dhall.nix {
     inherit pkgs;
   };
@@ -141,37 +149,43 @@ let
 
     purs-tidy = import ./purs-tidy {
       inherit pkgs;
+      inherit napalm;
     };
 
     psa = import ./psa {
       inherit pkgs;
+      inherit napalm;
     };
 
     pscid = import ./pscid {
       inherit pkgs;
+      inherit napalm;
+      purs=purs-0_15_8;
+      inherit spago;
     };
 
-    pulp-15_0_0 = import ./pulp/15.0.0 { inherit pkgs; };
+    # pulp-15_0_0 = import ./pulp/15.0.0 { inherit pkgs; };
 
-    pulp-16_0_0-0 = import ./pulp/16.0.0-0 { inherit pkgs; };
+    # pulp-16_0_0-0 = import ./pulp/16.0.0-0 { inherit pkgs; };
 
-    pulp-16_0_2 = import ./pulp/16.0.2 { inherit pkgs; };
+    # pulp-16_0_2 = import ./pulp/16.0.2 { inherit pkgs; };
 
-    pulp = pulp-16_0_2;
+    # pulp = pulp-16_0_2;
 
-    pulp-latest = import ./pulp/latest { inherit pkgs; };
+    # pulp-latest = import ./pulp/latest { inherit pkgs; };
 
     purescript-language-server = import ./purescript-language-server {
       inherit pkgs;
+      inherit napalm;
     };
 
     purty = import ./purty.nix {
       inherit pkgs;
     };
 
-    purs-backend-es-1_1_0 = import ./purs-backend-es/1.1.0 { inherit pkgs; };
+    # purs-backend-es-1_1_0 = import ./purs-backend-es/1.1.0 { inherit pkgs; };
 
-    purs-backend-es = purs-backend-es-1_1_0;
+    # purs-backend-es = purs-backend-es-1_1_0;
   };
 
   buildInputs = builtins.attrValues inputs;
