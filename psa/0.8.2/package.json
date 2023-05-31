@@ -1,0 +1,14 @@
+{
+  "name": "install-psa-0.8.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo noop"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "purescript-psa": "^0.8.2"
+  }
+}
