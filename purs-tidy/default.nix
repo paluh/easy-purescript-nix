@@ -3,9 +3,9 @@
 , nodejs ? pkgs."nodejs-16_x"
 , napalm
 }:
-  napalm.buildPackage ./.
+  napalm.buildPackage ./0.10.0
     {
-      packageLock = ./package-lock.json;
+      packageLock = ./0.10.0/package-lock.json;
       preNpmHook = ''
         mkdir -p $out/bin
         ln -s $out/_napalm-install/node_modules/.bin/purs-tidy $out/bin/purs-tidy

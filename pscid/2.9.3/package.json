@@ -1,7 +1,1 @@
-{
-  "name": "install-pscid-2.9.3",
-  "version": "1.0.0",
-  "dependencies": {
-    "pscid": "^2.10.0"
-  }
-}
+{ "dependencies": { "pscid": "^2.9.3" } }

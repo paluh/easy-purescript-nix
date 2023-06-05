@@ -5,10 +5,6 @@ let
     inherit pkgs;
   };
 
-  patchPackageLock = import ./patch-package-lock.nix {
-    inherit pkgs;
-  };
-
   easy-dhall = import ./easy-dhall.nix {
     inherit pkgs;
   };
@@ -164,15 +160,19 @@ let
       inherit spago;
     };
 
-    # pulp-15_0_0 = import ./pulp/15.0.0 { inherit pkgs; };
+    pulps = import ./pulp {
+      inherit napalm;
+    };
 
-    # pulp-16_0_0-0 = import ./pulp/16.0.0-0 { inherit pkgs; };
+    pulp-15_0_0 = pulps.pulp-15_0_0;
 
-    # pulp-16_0_2 = import ./pulp/16.0.2 { inherit pkgs; };
+    pulp-16_0_0-0 = pulps.pulp-16_0_0-0;
 
-    # pulp = pulp-16_0_2;
+    pulp-16_0_2 = pulps.pulp-16_0_2;
 
-    # pulp-latest = import ./pulp/latest { inherit pkgs; };
+    pulp = pulp-16_0_2;
+
+    pulp-latest = pulps.latest;
 
     purescript-language-server = import ./purescript-language-server {
       inherit pkgs;
