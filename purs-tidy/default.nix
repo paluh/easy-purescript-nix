@@ -5,10 +5,10 @@
 }:
 let
   purs-tidy = pkgs.fetchFromGitHub {
-    rev = "v0.9.2";
+    rev = "v0.10.0";
     owner = "natefaubion";
     repo = "purescript-tidy";
-    sha256 = "sha256-zn9+LC710bgbxflr8ggdam6Z5H6LA1Df/mYRjF/zzkQ=";
+    sha256 = "sha256-mFEWQF1rYLQiwKn9Ft6aK4QUGA7LBvhAiMnujxgzkXQ=";
   };
 in
   napalm.buildPackage "${purs-tidy}" { packageLock = "${purs-tidy}/package-lock.json";}
